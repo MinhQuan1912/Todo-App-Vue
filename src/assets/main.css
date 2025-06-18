@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #b5b5b5;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: 400px;
+  height: 600px;
+  border: 6px solid #abcea1;
+  border-radius: 8px;
+  padding: 0px 15px 15px 15px;
+  background-color: #fff;
+  overflow-y: scroll;
+}
+.app::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+#addNew {
+  background-color: rgba(171, 206, 161, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fa-plus {
+  background-color: #abcea1;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+#tasks div {
+  background-color: #e2eede;
+  border: 3px solid #abcea1;
+  padding: 5px;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 60px;
+  align-items: start;
+  gap: 4px;
+}
+
+#tasks div p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  white-space: normal;
+  overflow: hidden;
+  grid-column: 1 / span 2;
+  grid-row: 3;
+}
+
+#tasks {
+  display: grid;
+  gap: 14px;
+}
+
+.options {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.options i {
+  cursor: pointer;
+}
+
+#msg {
+  color: red;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+  padding-top: 15px;
+  margin-top: -15px;
+}
+
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  
+}
