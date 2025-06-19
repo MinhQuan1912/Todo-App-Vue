@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div ref="deleteModalRef" class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,6 +22,8 @@ import api from '@/apis/handleCRUD';
 const props = defineProps(['taskId']);
 const task = ref({});
 const emit = defineEmits(['close']);
+const deleteModalRef = ref(null);
+defineExpose({ deleteModalRef });
 watchEffect(async () => {
     if (props.taskId) {
         task.value = await api.findById(props.taskId);

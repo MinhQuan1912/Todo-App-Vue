@@ -8,9 +8,9 @@
       </div>
       <h5 class="text-center my-3">Tasks</h5>
     </div>
-    <AddTask @close="closeAddModal"></AddTask>
-    <EditTask :taskId="selectedTaskId" @close="closeEditModal"></EditTask>
-    <DeleteTask :taskId="selectedTaskId" @close="closeDeleteModal"></DeleteTask>
+    <AddTask @close="closeAddModal" ref="addTaskRef"></AddTask>
+    <EditTask :taskId="selectedTaskId" @close="closeEditModal" ref="editTaskRef"></EditTask>
+    <DeleteTask :taskId="selectedTaskId" @close="closeDeleteModal" ref="deleteTaskRef"></DeleteTask>
     <div id="tasks">
       <template v-if="tasks.length !== 0">
         <template v-for="task in tasks" :key="task.id">
@@ -36,7 +36,9 @@ import { ref, onMounted } from 'vue';
 import api from '@/apis/handleCRUD';
 const tasks = ref([]);
 const selectedTaskId = ref('');
-
+const addTaskRef = ref(null);
+const editTaskRef = ref(null)
+const deleteTaskRef= ref(null)
 onMounted(loadTasks);
 async function loadTasks() {
   try {
@@ -49,20 +51,20 @@ async function loadTasks() {
 
 async function openEditModal(taskId) {
   selectedTaskId.value = taskId;
-  const editModal = new bootstrap.Modal(document.querySelector('#editModal'));
+  const editModal = new bootstrap.Modal(editTaskRef.value.editModalRef);
   editModal.show();
 }
 
 function closeEditModal() {
   selectedTaskId.value = '';
-  const editModal = bootstrap.Modal.getInstance(document.querySelector('#editModal'));
+  const editModal = bootstrap.Modal.getInstance(editTaskRef.value.editModalRef);
   if (editModal) {
     editModal.hide();
   }
   loadTasks();
 }
 function closeAddModal() {
-  const addModal = bootstrap.Modal.getInstance(document.querySelector('#addModal'));
+  const addModal = bootstrap.Modal.getInstance(addTaskRef.value.modalRef);
   if (addModal) {
     addModal.hide();
   }
@@ -71,13 +73,13 @@ function closeAddModal() {
 
 async function openDeleteModal(taskId) {
   selectedTaskId.value = taskId;
-  const deleteModal = new bootstrap.Modal(document.querySelector('#deleteModal'));
+  const deleteModal = new bootstrap.Modal(deleteTaskRef.value.deleteModalRef);
   deleteModal.show();
 }
 
 function closeDeleteModal() {
   selectedTaskId.value = '';
-  const deleteModal = bootstrap.Modal.getInstance(document.querySelector('#deleteModal'));
+  const deleteModal = bootstrap.Modal.getInstance(deleteTaskRef.value.deleteModalRef);
   if (deleteModal) {
     deleteModal.hide();
   }

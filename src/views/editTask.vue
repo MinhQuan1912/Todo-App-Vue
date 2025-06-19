@@ -1,5 +1,5 @@
 <template>
-    <form class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    <form ref="editModalRef" class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         @submit.prevent="editTask">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -20,8 +20,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="closeModal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="editTask">Save
-                        changes</button>
+                    <button type="button" class="btn btn-primary" @click="editTask">Save changes</button>
                 </div>
             </div>
         </div>
@@ -37,7 +36,8 @@ const date = ref('');
 const desc = ref('');
 const task = ref({});
 const props = defineProps(['taskId']);
-
+const editModalRef = ref(null)
+defineExpose({ editModalRef });
 watchEffect(async () => {
     if (props.taskId) {
         try {
